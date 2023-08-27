@@ -47,7 +47,7 @@ class Admin_UI extends Module {
         $data = [
             '_nonce' => wp_create_nonce( 'wp_rest' ),
             'config' => [
-                'api' => '/wp-json/spider/v1',
+                'api_endpoint' => 'spider/v1',
                 'version' => self::$version,
                 'assets_uri' => SPIDER_URL . 'public/',
             ],
