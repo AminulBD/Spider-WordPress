@@ -1,0 +1,22 @@
+{
+    "name": "aminulbd/spider-wordpress",
+    "description": "Grab latest feed from search engine like Google, Bing, WordPress, etc.",
+    "type": "library",
+    "require": {
+        "php": ">=7.4",
+        "aminulbd/spider": "^0.0.1"
+    },
+    "license": "GPLv3",
+    "autoload": {
+        "psr-4": {
+            "AminulBD\\Spider\\WordPress\\": "inc/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Aminul Islam",
+            "email": "me@aminul.net"
+        }
+    ],
+    "minimum-stability": "stable"
+}
