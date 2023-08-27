@@ -50,9 +50,11 @@ class WordPress
             } else if($module::$type === 'frontend' && !is_admin()) {
                 $load = new $module($args);
                 $load->boot();
-            } else {
+            } else if($module::$type === 'any') {
                 $load = new $module($args);
                 $load->boot();
+            } else {
+                continue;
             }
 
             $this->modules[$module::$name] = $load;

@@ -7,7 +7,7 @@ use AminulBD\Spider\WordPress\Contracts\Module;
 class Admin_UI extends Module {
     public static string $name = 'Admin_UI';
     public static string $version = '1.0.0';
-    public static string $type = 'admin';
+    public static string $type = 'backend';
     private array $args = [];
 
     public function __construct(array $args = []) {
@@ -45,6 +45,7 @@ class Admin_UI extends Module {
 
     public function render() {
         $data = [
+            '_nonce' => wp_create_nonce( 'wp_rest' ),
             'config' => [
                 'api' => '/wp-json/spider/v1',
                 'version' => self::$version,

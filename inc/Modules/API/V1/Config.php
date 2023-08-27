@@ -7,7 +7,7 @@ use AminulBD\Spider\WordPress\Contracts\Module;
 class Config extends Module {
     public static string $name = 'APIV1_Config';
     public static string $version = '1.0.0';
-    public static string $type = 'backend';
+    public static string $type = 'any';
     private string $option_key = '_spider_config';
 
     public function __construct() {
@@ -20,12 +20,18 @@ class Config extends Module {
         register_rest_route('spider/v1', '/config', [
             'methods' => 'GET',
             'callback' => [$this, 'index'],
+            'permission_callback' => [$this, 'has_access'],
         ]);
 
         register_rest_route('spider/v1', '/config', [
             'methods' => 'POST',
             'callback' => [$this, 'store'],
+            'permission_callback' => [$this, 'has_access'],
         ]);
+    }
+
+    public function has_access() {
+        return current_user_can('manage_options');
     }
 
     private function clean_fields( array $data ) {

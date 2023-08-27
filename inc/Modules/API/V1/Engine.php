@@ -7,7 +7,7 @@ use AminulBD\Spider\WordPress\Contracts\Module;
 class Engine extends Module {
     public static string $name = 'APIV1_Engine';
     public static string $version = '1.0.0';
-    public static string $type = 'backend';
+    public static string $type = 'any';
 
     public function __construct() {
         $this->add_action('rest_api_init', [$this, 'routes']);
@@ -19,26 +19,31 @@ class Engine extends Module {
         register_rest_route('spider/v1', '/engines', [
             'methods' => 'GET',
             'callback' => [$this, 'index'],
+            'permission_callback' => [$this, 'has_access'],
         ]);
 
         register_rest_route('spider/v1', '/engines', [
             'methods' => 'POST',
             'callback' => [$this, 'create'],
+            'permission_callback' => [$this, 'has_access'],
         ]);
 
         register_rest_route('spider/v1', '/engines/(?P<id>\d+)', [
             'methods' => 'GET',
             'callback' => [$this, 'get'],
+            'permission_callback' => [$this, 'has_access'],
         ]);
 
         register_rest_route('spider/v1', '/engines/(?P<id>\d+)', [
             'methods' => 'PUT',
             'callback' => [$this, 'update'],
+            'permission_callback' => [$this, 'has_access'],
         ]);
 
         register_rest_route('spider/v1', '/engines/(?P<id>\d+)', [
             'methods' => 'DELETE',
             'callback' => [$this, 'delete_engine'],
+            'permission_callback' => [$this, 'has_access'],
         ]);
     }
 
@@ -50,6 +55,10 @@ class Engine extends Module {
             'config' => json_decode($engine->post_content, true),
             'status' => $engine->post_status,
         ];
+    }
+
+    public function has_access() {
+        return current_user_can('manage_options');
     }
 
     private function clean_fields( array $data ) {

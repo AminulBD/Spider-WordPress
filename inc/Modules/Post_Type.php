@@ -7,7 +7,7 @@ use AminulBD\Spider\WordPress\Contracts\Module;
 class Post_Type extends Module {
     public static string $name = 'Post_Type';
     public static string $version = '1.0.0';
-    public static string $type = 'admin';
+    public static string $type = 'backend';
 
     public function __construct() {
         $this->add_action('init', [$this, 'register']);
