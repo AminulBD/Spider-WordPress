@@ -7,7 +7,7 @@ use AminulBD\Spider\WordPress\Contracts\Module;
 class Config extends Module {
     public static string $name = 'APIV1_Config';
     public static string $version = '1.0.0';
-    public static string $type = 'admin';
+    public static string $type = 'backend';
     private string $option_key = '_spider_config';
 
     public function __construct() {
@@ -41,7 +41,7 @@ class Config extends Module {
         $config = get_option($this->option_key);
 
         return [
-            'message' => 'Spider Plugin Setup',
+            'message' => 'Spider configuration.',
             'data' => [
                 'pro_licence' => [
                     'type' => 'text',
