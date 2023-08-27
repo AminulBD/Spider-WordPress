@@ -2,7 +2,7 @@
 namespace AminulBD\Spider\WordPress;
 
 use AminulBD\Spider\WordPress\Modules\{
-    Admin_UI, API, Post_Type
+    Admin_UI, Post_Type
 };
 use AminulBD\Spider\WordPress\Modules\API\V1\{
     Config, Engine
