@@ -4,11 +4,15 @@ namespace AminulBD\Spider\WordPress;
 use AminulBD\Spider\WordPress\Modules\{
     Admin_UI, API, Post_Type
 };
+use AminulBD\Spider\WordPress\Modules\API\V1\{
+    Config, Engine
+};
 
 class WordPress
 {
     public string $version = '1.0.0';
 	private static ?self $instance = null;
+	private array $modules = [];
 
 	public function __construct(array $args = []) {
 	    $this->version = $args['version'] ?? $this->version;
@@ -28,8 +32,9 @@ class WordPress
 	public function load_modules() {
         $core = [
             Admin_UI::class,
-            API::class,
             Post_Type::class,
+            Config::class,
+            Engine::class,
         ];
 
         $custom = apply_filters('spider_modules', []);
@@ -49,7 +54,12 @@ class WordPress
                 $load = new $module($args);
                 $load->boot();
             }
-            new $module();
+
+            $this->modules[$module::$name] = $load;
         }
+    }
+
+    public function module(string $name) {
+        return $this->modules[$name] ?? null;
     }
 }
