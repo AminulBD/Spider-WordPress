@@ -29,6 +29,7 @@ require 'vendor/autoload.php';
 define( 'SPIDER_VERSION', '1.0.0' );
 define( 'SPIDER_URL', plugin_dir_url( __FILE__ ) );
 define( 'SPIDER_PATH', plugin_dir_path( __FILE__ ) );
+define( 'SPIDER_ASSET_URL', plugin_dir_url( __FILE__ ) . 'public/' );
 
 function spider() {
 	return \AminulBD\Spider\WordPress\WordPress::init([
@@ -38,17 +39,3 @@ function spider() {
 
 // Kick
 spider();
-
-// Load admin things.
-if ( is_admin() ) {
-    new \AminulBD\Spider\WordPress\Admin();
-}
-
-
-// // Function to register our new routes from the controller.
-// function prefix_register_my_rest_routes() {
-//     $controller = new AminulBD\Spider\WordPress\Api\V1\Engines_Controller();
-//     $controller->register_routes();
-// }
-
-// add_action( 'rest_api_init', 'prefix_register_my_rest_routes' );
