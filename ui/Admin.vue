@@ -1,6 +1,6 @@
 <template>
   <div class="spider-admin-wrapper">
-    <p>Hello vue</p>
+    <p class="text-red-500">Hello vue</p>
   </div>
 </template>
 
@@ -21,9 +21,3 @@ export default {
   },
 }
 </script>
-
-<style scoped>
-    div {
-        color: red;
-    }
-</style>
