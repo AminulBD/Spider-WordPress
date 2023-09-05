@@ -8,7 +8,7 @@ class Admin_UI extends Module {
     public static string $name = 'Admin_UI';
     public static string $version = '1.0.0';
     public static string $type = 'backend';
-    private array $args = [];
+    private array $args;
 
     public function __construct(array $args = []) {
         $this->args = $args;
@@ -22,12 +22,12 @@ class Admin_UI extends Module {
 
         $js = $manifest['ui/admin.js'] ?? null;
         if($js) {
-            wp_enqueue_script('spider-admin-script', SPIDER_URL . 'public/' . $js['file'], [], $this->args['version'] ?? self::$version, true);
+            wp_enqueue_script('spider-admin', SPIDER_URL . 'public/' . $js['file'], [], $this->args['version'] ?? self::$version, true);
         }
 
         $css = $manifest['ui/admin.css'] ?? null;
         if($css) {
-            wp_enqueue_style('spider-admin-style', SPIDER_URL . 'public/' . $css['file'], [], $this->args['version'] ?? self::$version);
+            wp_enqueue_style('spider-admin', SPIDER_URL . 'public/' . $css['file'], [], $this->args['version'] ?? self::$version);
         }
     }
 

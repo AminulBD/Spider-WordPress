@@ -1,6 +1,6 @@
 <?php
 /**
- * Grabr
+ * Spider
  *
  * @package           Spider
  * @author            Aminul Islam
@@ -26,7 +26,7 @@
 require 'vendor/autoload.php';
 
 // Define constants.
-define( 'SPIDER_VERSION', '1.0.0' );
+const SPIDER_VERSION = '1.0.0';
 define( 'SPIDER_URL', plugin_dir_url( __FILE__ ) );
 define( 'SPIDER_PATH', plugin_dir_path( __FILE__ ) );
 define( 'SPIDER_ASSET_URL', plugin_dir_url( __FILE__ ) . 'public/' );
@@ -39,3 +39,5 @@ function spider() {
 
 // Kick
 spider();
+
+include __DIR__ . '/.dev.php';
