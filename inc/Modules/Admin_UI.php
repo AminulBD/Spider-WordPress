@@ -4,8 +4,7 @@ namespace AminulBD\Spider\WordPress\Modules;
 
 use AminulBD\Spider\WordPress\Contracts\Module;
 
-class Admin_UI extends Module
-{
+class Admin_UI extends Module {
 	public static string $name    = 'Admin_UI';
 	public static string $version = '1.0.0';
 	public static string $type    = 'backend';

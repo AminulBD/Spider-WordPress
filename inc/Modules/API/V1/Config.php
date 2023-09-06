@@ -5,8 +5,7 @@ namespace AminulBD\Spider\WordPress\Modules\API\V1;
 use AminulBD\Spider\WordPress\Contracts\Module;
 use WP_REST_Request;
 
-class Config extends Module
-{
+class Config extends Module {
 	public static string $name       = 'APIv1_Config';
 	public static string $version    = '1.0.0';
 	public static string $type       = 'any';
@@ -14,7 +13,6 @@ class Config extends Module
 
 	public function __construct() {
 		$this->add_action( 'rest_api_init', [ $this, 'routes' ] );
-		// TODO: Authorizations and Schema
 	}
 
 	public function routes() {

@@ -6,15 +6,13 @@ use AminulBD\Spider\WordPress\Contracts\Module;
 use WP_Post;
 use WP_REST_Request;
 
-class Site extends Module
-{
+class Site extends Module {
 	public static string $name    = 'APIv1_Site';
 	public static string $version = '1.0.0';
 	public static string $type    = 'any';
 
 	public function __construct() {
 		$this->add_action( 'rest_api_init', [ $this, 'routes' ] );
-		// TODO: Authorizations and Schema
 	}
 
 	public function routes(): void {

@@ -7,8 +7,7 @@ use AminulBD\Spider\WordPress\Modules\{
 };
 use AminulBD\Spider\WordPress\Modules\API\V1\{Config, Engine, Site};
 
-final class Spider
-{
+final class Spider {
 	public string       $version = '1.0.0';
 	private array       $modules = [];
 	private static self $instance;
