@@ -127,13 +127,15 @@ class Engine extends Module {
 			];
 		}
 
-		$data = $this->clean_fields( $request->get_json_params() );
+		$data       = $this->clean_fields( $request->get_json_params() );
+		$inp_config = $data[ 'config' ];
+		$ori_config = json_decode( $engine->post_content, true ) ?? [];
 
 		wp_update_post( [
 			'ID'           => $id,
 			'post_title'   => $data[ 'name' ],
 			'post_name'    => $data[ 'identifier' ],
-			'post_content' => json_encode( $data[ 'config' ], JSON_PRETTY_PRINT ),
+			'post_content' => json_encode( array_merge( $ori_config, $inp_config ), JSON_PRETTY_PRINT ),
 			'post_status'  => $data[ 'status' ],
 		] );
 

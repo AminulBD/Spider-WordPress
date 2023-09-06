@@ -77,7 +77,7 @@ class Site extends Module {
 		return array_merge( $defaults, $filtered );
 	}
 
-	public function index() {
+	public function index(): array {
 		$sites = get_posts( [
 			'post_type'   => 'spider_site',
 			'post_status' => [ 'active', 'inactive' ],
@@ -134,22 +134,29 @@ class Site extends Module {
 			];
 		}
 
-		$data = $this->clean_fields( $request->get_json_params() );
+		$data        = $this->clean_fields( $request->get_json_params() );
+		$content     = json_decode( $site->post_content, true ) ?? [];
+		$inp_config  = $data[ 'config' ];
+		$orig_config = $content[ 'config' ] ?? [];
+		$engine      = $data[ 'engine' ] ?? $content[ 'engine' ];
 
 		wp_update_post( [
 			'ID'           => $id,
 			'post_title'   => $data[ 'name' ],
 			'post_name'    => $data[ 'identifier' ],
 			'post_content' => json_encode( [
-				'engine' => $data[ 'engine' ],
-				'config' => $data[ 'config' ],
+				'engine' => $engine,
+				'config' => array_merge( $orig_config, $inp_config ),
 			], JSON_PRETTY_PRINT ),
 			'post_status'  => $data[ 'status' ],
 		] );
 
 		return [
 			'message' => __( 'Site has been updated.', 'spider' ),
-			'data'    => array_merge( $data, [ 'id' => $id ] ),
+			'data'    => array_merge( $data, [
+				'id'     => $id,
+				'engine' => $engine,
+			] ),
 		];
 	}
 
