@@ -3,13 +3,27 @@
 		<nav>
 			<ul class="flex border-b-2">
 				<li class="mb-0">
-					<a href="#sites" class="block py-2 mr-6 border-b-2 -mb-[2px] focus:outline-0 font-bold transition-all" :class="{ 'border-b-black': isActive('sites') }" @click="switchTo('sites')">Spiders</a>
+					<a
+						href="#sites"
+						class="block py-2 mr-6 border-b-2 -mb-[2px] focus:outline-0 font-bold transition-all"
+						:class="{ 'border-b-black': isActive('sites') }"
+						@click="switchTo('sites')"
+					>Sites</a>
 				</li>
 				<li class="mb-0">
-					<a href="#engines" class="block py-2 mr-6 border-b-2 -mb-[2px] focus:outline-0 font-bold transition-all" :class="{ 'border-b-black': isActive('engines') }" @click="switchTo('engines')">Engines</a>
+					<a
+						href="#engines"
+						class="block py-2 mr-6 border-b-2 -mb-[2px] focus:outline-0 font-bold transition-all"
+						:class="{ 'border-b-black': isActive('engines') }"
+						@click="switchTo('engines')"
+					>Engines</a>
 				</li>
 				<li class="mb-0">
-					<a href="#settings" class="block py-2 mr-6 border-b-2 -mb-[2px] focus:outline-0 font-bold transition-all" :class="{ 'border-b-black': isActive('settings') }" @click="switchTo('settings')">Settings</a>
+					<a href="#settings"
+						 class="block py-2 mr-6 border-b-2 -mb-[2px] focus:outline-0 font-bold transition-all"
+						 :class="{ 'border-b-black': isActive('settings') }"
+						 @click="switchTo('settings')"
+					>Settings</a>
 				</li>
 			</ul>
 		</nav>
@@ -33,21 +47,25 @@ export default {
 		Engines,
 		Settings,
 	},
+
 	data() {
 		return {
 			screen: 'sites', // TODO: Active default from url hash
 		}
 	},
+
 	created() {
 		const url = new URL(window.location.href)
 		const hash = url.hash.slice(1)
 
 		this.screen = hash || 'sites'
 	},
+
 	methods: {
 		isActive(current) {
 			return this.screen === current
 		},
+
 		switchTo(screen) {
 			this.screen = screen
 		}
