@@ -7,22 +7,23 @@ import apiClient from "../lib/api-client";
 
 export default {
   name: 'Settings',
+
   data() {
-	return {
-	  settings: {  },
-	}
+		return {
+			settings: {  },
+		}
   },
 
   created() {
-	this.fetchSettings()
+		this.fetchSettings()
   },
 
   methods: {
-	async fetchSettings() {
-	  const { data } = await apiClient.get('/config')
+		async fetchSettings() {
+			const { data } = await apiClient.get('/config')
 
-	  this.settings = data
-	},
+			this.settings = data
+		},
   }
 }
 </script>

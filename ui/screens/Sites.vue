@@ -7,6 +7,7 @@ import apiClient from "../lib/api-client";
 
 export default {
 	name: 'Sites',
+
 	data() {
 		return {
 			sites: [],
