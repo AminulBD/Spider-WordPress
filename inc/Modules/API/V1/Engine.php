@@ -80,7 +80,7 @@ class Engine extends Module {
 		] );
 
 		return [
-			'message' => 'All available engines are fetched.',
+			'message' => __( 'List of engines.', 'spider' ),
 			'data'    => array_map( [ $this, 'transform' ], $engines ),
 		];
 	}
@@ -96,7 +96,7 @@ class Engine extends Module {
 		] );
 
 		return [
-			'message' => 'Engine has been created.',
+			'message' => __( 'Engine has been created.', 'spider' ),
 			'data'    => array_merge( $data, [ 'id' => $id ] ),
 		];
 	}
@@ -107,12 +107,12 @@ class Engine extends Module {
 
 		if ( !$engine || $engine->post_type !== 'spider_engine' ) {
 			return [
-				'message' => 'The requested engine does not exist.',
+				'message' => __( 'The requested engine does not exist.', 'spider' ),
 			];
 		}
 
 		return [
-			'message' => 'The requested engine is fetched.',
+			'message' => __( 'Engine details.', 'spider' ),
 			'data'    => $this->transform( $engine ),
 		];
 	}
@@ -123,7 +123,7 @@ class Engine extends Module {
 
 		if ( !$engine || $engine->post_type !== 'spider_engine' ) {
 			return [
-				'message' => 'The requested engine does not exist.',
+				'message' => __( 'The requested engine does not exist.', 'spider' ),
 			];
 		}
 
@@ -149,14 +149,14 @@ class Engine extends Module {
 
 		if ( !$engine || $engine->post_type !== 'spider_engine' ) {
 			return [
-				'message' => 'The requested engine does not exist.',
+				'message' => __( 'The requested engine does not exist.', 'spider' ),
 			];
 		}
 
 		wp_delete_post( $id, true );
 
 		return [
-			'message' => 'The engine has been deleted.',
+			'message' => __( 'Engine has been deleted.', 'spider' ),
 		];
 	}
 }

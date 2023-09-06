@@ -1,0 +1,113 @@
+# Copyright (C) 2023 Aminul Islam
+# This file is distributed under the GPL v2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: Spider 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/spider\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2023-09-06T07:22:13+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.8.1\n"
+"X-Domain: spider\n"
+
+#. Plugin Name of the plugin
+#: inc/Modules/Admin_UI.php:46
+#: inc/Modules/Admin_UI.php:47
+msgid "Spider"
+msgstr ""
+
+#. Plugin URI of the plugin
+msgid "https://aminul.net/wordpress-plugins/spider"
+msgstr ""
+
+#. Description of the plugin
+msgid "Get latest feed from search engine like Google, Bing, WordPress, etc."
+msgstr ""
+
+#. Author of the plugin
+msgid "Aminul Islam"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://aminul.net"
+msgstr ""
+
+#: inc/Modules/API/V1/Config.php:53
+msgid "Pro Licence"
+msgstr ""
+
+#: inc/Modules/API/V1/Config.php:54
+msgid "Enter your pro licence key"
+msgstr ""
+
+#: inc/Modules/API/V1/Config.php:70
+msgid "Configuration saved successfully."
+msgstr ""
+
+#: inc/Modules/API/V1/Engine.php:83
+msgid "List of engines."
+msgstr ""
+
+#: inc/Modules/API/V1/Engine.php:99
+msgid "Engine has been created."
+msgstr ""
+
+#: inc/Modules/API/V1/Engine.php:110
+#: inc/Modules/API/V1/Engine.php:126
+#: inc/Modules/API/V1/Engine.php:152
+msgid "The requested engine does not exist."
+msgstr ""
+
+#: inc/Modules/API/V1/Engine.php:115
+msgid "Engine details."
+msgstr ""
+
+#: inc/Modules/API/V1/Engine.php:159
+msgid "Engine has been deleted."
+msgstr ""
+
+#: inc/Modules/API/V1/Site.php:87
+msgid "List of sites."
+msgstr ""
+
+#: inc/Modules/API/V1/Site.php:106
+msgid "Site has been created."
+msgstr ""
+
+#: inc/Modules/API/V1/Site.php:117
+#: inc/Modules/API/V1/Site.php:133
+#: inc/Modules/API/V1/Site.php:162
+msgid "The requested site does not exist."
+msgstr ""
+
+#: inc/Modules/API/V1/Site.php:122
+msgid "Site details."
+msgstr ""
+
+#: inc/Modules/API/V1/Site.php:151
+msgid "Site has been updated."
+msgstr ""
+
+#: inc/Modules/API/V1/Site.php:169
+msgid "Site has been deleted."
+msgstr ""
+
+#: inc/Modules/Post_Type.php:19
+msgid "Engines"
+msgstr ""
+
+#: inc/Modules/Post_Type.php:20
+msgid "Engine"
+msgstr ""
+
+#: inc/Modules/Post_Type.php:26
+msgid "Sites"
+msgstr ""
+
+#: inc/Modules/Post_Type.php:27
+msgid "Site"
+msgstr ""

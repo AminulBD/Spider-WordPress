@@ -43,8 +43,8 @@ class Admin_UI extends Module {
 
 	public function menu() {
 		add_menu_page(
-			'Spider',
-			'Spider',
+			esc_html__( 'Spider', 'spider' ),
+			esc_html__( 'Spider', 'spider' ),
 			'manage_options',
 			'spider',
 			[ $this, 'render' ],

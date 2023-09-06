@@ -84,7 +84,7 @@ class Site extends Module {
 		] );
 
 		return [
-			'message' => 'All available sites are fetched.',
+			'message' => __( 'List of sites.', 'spider' ),
 			'data'    => array_map( [ $this, 'transform' ], $sites ),
 		];
 	}
@@ -103,7 +103,7 @@ class Site extends Module {
 		] );
 
 		return [
-			'message' => 'Site has been created.',
+			'message' => __( 'Site has been created.', 'spider' ),
 			'data'    => array_merge( $data, [ 'id' => $id ] ),
 		];
 	}
@@ -114,12 +114,12 @@ class Site extends Module {
 
 		if ( !$site || $site->post_type !== 'spider_site' ) {
 			return [
-				'message' => 'The requested site does not exist.',
+				'message' => __( 'The requested site does not exist.', 'spider' ),
 			];
 		}
 
 		return [
-			'message' => 'The requested site is fetched.',
+			'message' => __( 'Site details.', 'spider' ),
 			'data'    => $this->transform( $site ),
 		];
 	}
@@ -130,7 +130,7 @@ class Site extends Module {
 
 		if ( !$site || $site->post_type !== 'spider_site' ) {
 			return [
-				'message' => 'The requested site does not exist.',
+				'message' => __( 'The requested site does not exist.', 'spider' ),
 			];
 		}
 
@@ -148,7 +148,7 @@ class Site extends Module {
 		] );
 
 		return [
-			'message' => 'Site has been updated.',
+			'message' => __( 'Site has been updated.', 'spider' ),
 			'data'    => array_merge( $data, [ 'id' => $id ] ),
 		];
 	}
@@ -159,14 +159,14 @@ class Site extends Module {
 
 		if ( !$site || $site->post_type !== 'spider_site' ) {
 			return [
-				'message' => 'The requested site does not exist.',
+				'message' => __( 'The requested site does not exist.', 'spider' ),
 			];
 		}
 
 		wp_delete_post( $id, true );
 
 		return [
-			'message' => 'The site has been deleted.',
+			'message' => __( 'Site has been deleted.', 'spider' ),
 		];
 	}
 }

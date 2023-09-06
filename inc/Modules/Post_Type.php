@@ -16,15 +16,15 @@ class Post_Type extends Module {
 	public function register() {
 		register_post_type( 'spider_engine', [
 			'labels' => [
-				'name'          => 'Engines',
-				'singular_name' => 'Engine',
+				'name'          => __( 'Engines', 'spider' ),
+				'singular_name' => __( 'Engine', 'spider' ),
 			],
 		] );
 
 		register_post_type( 'spider_site', [
 			'labels' => [
-				'name'          => 'Spiders',
-				'singular_name' => 'Spider',
+				'name'          => __( 'Sites', 'spider' ),
+				'singular_name' => __( 'Site', 'spider' ),
 			],
 		] );
 	}

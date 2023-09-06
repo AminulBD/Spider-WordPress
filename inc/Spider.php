@@ -15,6 +15,8 @@ final class Spider {
 	public function __construct( array $args = [] ) {
 		$this->version = $args[ 'version' ] ?? $this->version;
 
+		add_action( 'init', [ $this, 'i18n' ] );
+
 		$this->load_modules();
 	}
 
@@ -24,6 +26,10 @@ final class Spider {
 		}
 
 		return self::$instance;
+	}
+
+	public function i18n(): void {
+		load_plugin_textdomain( 'spider', false, SPIDER_PATH . '/languages' );
 	}
 
 	private function load_modules() {

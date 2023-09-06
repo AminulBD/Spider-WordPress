@@ -50,8 +50,8 @@ class Config extends Module {
 			'data'    => [
 				'pro_licence' => [
 					'type'        => 'text',
-					'label'       => 'Pro Licence',
-					'placeholder' => 'Enter Pro Licence',
+					'label'       => __( 'Pro Licence', 'spider' ),
+					'placeholder' => __( 'Enter your pro licence key', 'spider' ),
 					'rules'       => [ 'required' ],
 					'default'     => null,
 					'value'       => $config[ 'pro_licence' ] ?? null,
@@ -67,7 +67,7 @@ class Config extends Module {
 		update_option( $this->option_key, $data );
 
 		return [
-			'message' => 'Settings has been updated.',
+			'message' => __( 'Configuration saved successfully.', 'spider' ),
 			'data'    => $data,
 		];
 	}
