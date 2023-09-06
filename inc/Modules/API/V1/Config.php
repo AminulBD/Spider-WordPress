@@ -49,6 +49,7 @@ class Config extends Module {
 			'message' => 'Spider configuration.',
 			'data'    => [
 				'pro_licence' => [
+					'name'        => 'pro_licence',
 					'type'        => 'text',
 					'label'       => __( 'Pro Licence', 'spider' ),
 					'placeholder' => __( 'Enter your pro licence key', 'spider' ),
