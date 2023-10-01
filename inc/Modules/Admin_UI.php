@@ -18,7 +18,7 @@ class Admin_UI extends Module {
 	}
 
 	public function assets() {
-		$manifest = json_decode( file_get_contents( SPIDER_PATH . '/public/manifest.json' ), true );
+		$manifest = json_decode( file_get_contents( SPIDER_PATH . 'public/manifest.json' ), true );
 
 		$js = $manifest[ 'ui/admin.js' ] ?? null;
 		if ( $js ) {
