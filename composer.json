@@ -1,7 +1,7 @@
 {
   "name": "aminulbd/spider-wordpress",
   "description": "Grab latest feed from search engine like Google, Bing, WordPress, etc.",
-  "type": "library",
+  "type": "wordpress-plugin",
   "require": {
     "php": ">=7.4",
     "ext-json": "*",
