@@ -4,7 +4,7 @@
 			Loading...
 		</div>
 		<div v-if="!sites.length && !isLoading" class="border border-yellow-300 bg-yellow-100 p-2 shadow rounded">
-			No sites are available.
+			No sites are available. <a href="#" @click.prevent="current = {}">Create New Site</a>
 		</div>
 		<div v-else class="bg-white rounded shadow">
 			<div class="flex justify-between items-center p-4 border-b">
@@ -17,8 +17,6 @@
 				</div>
 			</div>
 
-			<SiteForm v-if="current" :site="current" @save="this.save" @cancel="current = null" />
-
 			<ul role="list" class="divide-y">
 				<li v-for="(site, idx) of sites" class="flex justify-between items-center mb-0 p-4 hover:bg-gray-50 transition-all hover:cursor-pointer" :key="idx" @click="current = site">
 					<div class="flex min-w-0 gap-x-4">
@@ -29,11 +27,16 @@
 						</div>
 					</div>
 					<div class="shrink-0 flex flex-col items-end">
+						<button @click.stop="this.delete(site.id)">
+							<img class="h-6 w-6 flex-none rounded-full bg-gray-50" src="../icons/trash.svg" alt="">
+						</button>
 						<span class="border bg-gray-600 rounded px-1.5 text-white text-xs inline-block" :class="{ 'bg-green-600': site.status === 'active' }">{{ site.status?.toUpperCase() }}</span>
 					</div>
 				</li>
 			</ul>
 		</div>
+
+		<SiteForm v-if="current" :isLoading="isLoading" :site="current" @save="this.save" @cancel="current = null" />
 	</div>
 </template>
 
@@ -69,13 +72,21 @@ export default {
 		async save() {
 			this.isLoading = true
 			const { name, engine, config, status } = this.current
-			let res
 
 			if (this.current.id) {
-				res = await apiClient.put(`/sites/${ this.current.id }`, { name, engine, config, status })
+				await apiClient.put(`/sites/${ this.current.id }`, { name, engine, config, status })
 			} else {
-				res = await apiClient.post('/sites', { name, engine, config, status })
+				await apiClient.post('/sites', { name, engine, config, status })
 			}
+
+			await this.fetchSites()
+			this.current = null
+			this.isLoading = false
+		},
+
+		async delete(id) {
+			this.isLoading = true
+			await apiClient.delete(`/sites/${ id }`)
 
 			await this.fetchSites()
 			this.current = null

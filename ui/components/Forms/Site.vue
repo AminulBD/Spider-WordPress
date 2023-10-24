@@ -41,8 +41,8 @@
 			</div>
 
 			<div class="grid gap-y-1 mt-4">
-				<button class="py-2 px-4 rounded shadow bg-indigo-600 text-white hover:bg-indigo-500 transition-all" @click="$emit('save')">Save</button>
-				<button class="py-2 px-4 rounded shadow bg-red-600 text-white hover:bg-red-500 transition-all" @click="$emit('cancel')">Cancel</button>
+				<button :disabled="isLoading" class="py-2 px-4 rounded shadow bg-indigo-600 text-white hover:bg-indigo-500 transition-all" @click="$emit('save')">Save</button>
+				<button :disabled="isLoading" class="py-2 px-4 rounded shadow bg-red-600 text-white hover:bg-red-500 transition-all" @click="$emit('cancel')">Cancel</button>
 			</div>
 		</div>
 	</div>
@@ -51,7 +51,7 @@
 <script>
 export default {
 	name: 'Site',
-	props: [ 'site' ],
+	props: [ 'site', 'isLoading' ],
 
 	data() {
 		return {
