@@ -65,8 +65,8 @@ class Site extends Module {
 
 	private function clean_fields( array $data ): array {
 		$defaults = [
-			'name'   => null,
-			'engine' => null,
+			'name'   => 'New Site',
+			'engine' => 'google',
 			'status' => 'inactive',
 			'config' => [],
 		];
