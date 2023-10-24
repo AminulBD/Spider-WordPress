@@ -5,7 +5,9 @@ namespace AminulBD\Spider\WordPress;
 use AminulBD\Spider\WordPress\Modules\{
 	Admin_UI, Post_Type
 };
-use AminulBD\Spider\WordPress\Modules\API\V1\{Config, Engine, Site};
+use AminulBD\Spider\WordPress\Modules\API\V1\{
+	Config, Site
+};
 
 final class Spider {
 	public string       $version = '1.0.0';
@@ -37,7 +39,6 @@ final class Spider {
 			Admin_UI::class,
 			Post_Type::class,
 			Config::class,
-			Engine::class,
 			Site::class,
 		];
 

@@ -10,11 +10,16 @@
 			<div class="flex justify-between items-center p-4 border-b">
 				<h2 class="text-lg font-bold">Sites</h2>
 				<div class="items-end">
-					<button class="rounded shadow px-3 py-1 bg-blue-600 text-white hover:bg-blue-500 transition-all">Create New Site</button>
+					<button class="rounded shadow px-3 py-1 bg-indigo-600 text-white hover:bg-indigo-500 transition-all"
+							@click="current = {}"
+					>Create New Site</button>
 				</div>
 			</div>
+
+			<SiteForm v-if="current" :site="current" @save="console.log(this.current)" @cancel="current = null" />
+
 			<ul role="list" class="divide-y">
-				<li v-for="(site, idx) of sites" class="flex justify-between mb-0 p-4 hover:bg-gray-50 transition-all" :key="idx">
+				<li v-for="(site, idx) of sites" class="flex justify-between mb-0 p-4 hover:bg-gray-50 transition-all hover:cursor-pointer" :key="idx" @click="current = site">
 					<div class="flex min-w-0 gap-x-4">
 						<img class="h-12 w-12 flex-none rounded-full bg-gray-50" src="../icons/engine.svg" alt="">
 						<div class="min-w-0 flex-auto">
@@ -34,12 +39,16 @@
 
 <script>
 import apiClient from "~/lib/api-client";
+import SiteForm from "~/components/Forms/Site.vue";
 
 export default {
 	name: 'Sites',
 
+	components: { SiteForm },
+
 	data() {
 		return {
+			current: null,
 			sites: [],
 			isLoading: true,
 		}

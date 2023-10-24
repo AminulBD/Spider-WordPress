@@ -14,13 +14,6 @@ class Post_Type extends Module {
 	}
 
 	public function register() {
-		register_post_type( 'spider_engine', [
-			'labels' => [
-				'name'          => __( 'Engines', 'spider' ),
-				'singular_name' => __( 'Engine', 'spider' ),
-			],
-		] );
-
 		register_post_type( 'spider_site', [
 			'labels' => [
 				'name'          => __( 'Sites', 'spider' ),

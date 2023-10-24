@@ -3,20 +3,11 @@
 		<nav>
 			<ul class="flex border-b-2">
 				<li class="mb-0">
-					<a
-						href="#sites"
-						class="block py-2 mr-6 border-b-2 -mb-[2px] focus:outline-0 font-bold transition-all"
-						:class="{ 'border-b-black': isActive('sites') }"
-						@click="switchTo('sites')"
+					<a href="#sites"
+					   class="block py-2 mr-6 border-b-2 -mb-[2px] focus:outline-0 font-bold transition-all"
+					   :class="{ 'border-b-black': isActive('sites') }"
+					   @click="switchTo('sites')"
 					>Sites</a>
-				</li>
-				<li class="mb-0">
-					<a
-						href="#engines"
-						class="block py-2 mr-6 border-b-2 -mb-[2px] focus:outline-0 font-bold transition-all"
-						:class="{ 'border-b-black': isActive('engines') }"
-						@click="switchTo('engines')"
-					>Engines</a>
 				</li>
 				<li class="mb-0">
 					<a href="#settings"
@@ -29,7 +20,6 @@
 		</nav>
 		<main class="pt-4">
 			<Sites id="sites" v-if="isActive('sites')" />
-			<Engines id="engines" v-if="isActive('engines')" />
 			<Settings id="settings" v-if="isActive('settings')" />
 		</main>
 	</div>
@@ -37,12 +27,11 @@
 
 <script>
 import Sites from '~/screens/Sites.vue'
-import Engines from '~/screens/Engines.vue'
 import Settings from '~/screens/Settings.vue'
 
 export default {
-	name: 'SpiderAdmin',
-	components: { Sites, Engines, Settings },
+	name: 'Admin',
+	components: { Sites, Settings },
 
 	data() {
 		return {
