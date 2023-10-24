@@ -20,9 +20,9 @@
 				</li>
 				<li class="mb-0">
 					<a href="#settings"
-						 class="block py-2 mr-6 border-b-2 -mb-[2px] focus:outline-0 font-bold transition-all"
-						 :class="{ 'border-b-black': isActive('settings') }"
-						 @click="switchTo('settings')"
+					   class="block py-2 mr-6 border-b-2 -mb-[2px] focus:outline-0 font-bold transition-all"
+					   :class="{ 'border-b-black': isActive('settings') }"
+					   @click="switchTo('settings')"
 					>Settings</a>
 				</li>
 			</ul>
@@ -36,21 +36,17 @@
 </template>
 
 <script>
-import Sites from './screens/Sites.vue'
-import Engines from './screens/Engines.vue'
-import Settings from './screens/Settings.vue'
+import Sites from '~/screens/Sites.vue'
+import Engines from '~/screens/Engines.vue'
+import Settings from '~/screens/Settings.vue'
 
 export default {
 	name: 'SpiderAdmin',
-	components: {
-		Sites,
-		Engines,
-		Settings,
-	},
+	components: { Sites, Engines, Settings },
 
 	data() {
 		return {
-			screen: 'sites', // TODO: Active default from url hash
+			screen: 'sites',
 		}
 	},
 

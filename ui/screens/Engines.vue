@@ -6,33 +6,27 @@
 		<div v-if="!engines.length && !isLoading" class="border border-yellow-300 bg-yellow-100 p-2 shadow rounded">
 			No sites are available.
 		</div>
-		<div class="flex flex-wrap -mx-2">
-			<div v-for="engine of engines" class="w-1/4 p-2">
-				<div class="shadow bg-white p-2 rounded h-full">
-					<div class="mb-2">
-						<div class="text-gray-400">Name</div>
-						<div class="text-sm">{{ engine.name }}</div>
-					</div>
-					<div class="mb-2">
-						<div class="text-gray-400">Identifier</div>
-						<div class="text-sm">{{ engine.identifier }}</div>
-					</div>
-					<div class="mb-2">
-						<div class="text-gray-400">Engine</div>
-						<div class="text-sm">{{ engine.engine }}</div>
-					</div>
-					<div class="mb-2">
-						<div class="text-gray-400">Status</div>
-						<span class="border bg-gray-600 rounded px-1.5 text-white text-xs inline-block" :class="{ 'bg-green-600': engine.status === 'active' }">{{ engine.status }}</span>
+
+		<ul role="list" class="divide-y bg-white rounded shadow">
+			<li v-for="(engine, idx) of engines" class="flex justify-between mb-0 p-4 hover:bg-gray-50 transition-all" :key="idx">
+				<div class="flex min-w-0 gap-x-4">
+					<img class="h-12 w-12 flex-none rounded-full bg-gray-50" src="../icons/engine.svg" alt="">
+					<div class="min-w-0 flex-auto">
+						<p class="text-sm font-semibold leading-6 text-gray-900">{{ engine.name }}</p>
+						<p class="mt-1 truncate text-xs leading-5 text-gray-500">{{ engine.identifier }}</p>
 					</div>
 				</div>
-			</div>
-		</div>
+				<div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
+					<p class="text-sm leading-6 text-gray-900">{{ engine.engine }}</p>
+					<span class="border bg-gray-600 rounded px-1.5 text-white text-xs inline-block" :class="{ 'bg-green-600': engine.status === 'active' }">{{ engine.status }}</span>
+				</div>
+			</li>
+		</ul>
 	</div>
 </template>
 
 <script>
-import apiClient from "../lib/api-client";
+import apiClient from "~/lib/api-client";
 
 export default {
 	name: 'Engines',
