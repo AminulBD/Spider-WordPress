@@ -40,4 +40,7 @@ function spider(): \AminulBD\Spider\WordPress\Spider {
 // Kick
 spider();
 
-include __DIR__ . '/.dev.php';
+$devFile = __DIR__ . '/.dev.php';
+if ( file_exists( $devFile ) ) {
+	include $devFile;
+}
