@@ -51,12 +51,11 @@ class Site extends Module {
 		$content = json_decode( $site->post_content, true );
 
 		return [
-			'id'         => $site->ID,
-			'name'       => $site->post_title,
-			'identifier' => $site->post_name,
-			'engine'     => $content[ 'engine' ],
-			'config'     => $content[ 'config' ],
-			'status'     => $site->post_status,
+			'id'     => $site->ID,
+			'name'   => $site->post_title,
+			'engine' => $content[ 'engine' ],
+			'config' => $content[ 'config' ],
+			'status' => $site->post_status,
 		];
 	}
 
@@ -66,11 +65,10 @@ class Site extends Module {
 
 	private function clean_fields( array $data ): array {
 		$defaults = [
-			'name'       => null,
-			'identifier' => null,
-			'engine'     => null,
-			'status'     => 'inactive',
-			'config'     => [],
+			'name'   => null,
+			'engine' => null,
+			'status' => 'inactive',
+			'config' => [],
 		];
 		$filtered = array_intersect_key( $data, $defaults );
 
@@ -79,6 +77,7 @@ class Site extends Module {
 
 	public function index(): array {
 		$sites = get_posts( [
+			'numberposts' => -1,
 			'post_type'   => 'spider_site',
 			'post_status' => [ 'active', 'inactive' ],
 		] );
@@ -94,7 +93,6 @@ class Site extends Module {
 		$id   = wp_insert_post( [
 			'post_type'    => 'spider_site',
 			'post_title'   => $data[ 'name' ],
-			'post_name'    => $data[ 'identifier' ],
 			'post_content' => json_encode( [
 				'engine' => $data[ 'engine' ],
 				'config' => $data[ 'config' ],
@@ -143,7 +141,6 @@ class Site extends Module {
 		wp_update_post( [
 			'ID'           => $id,
 			'post_title'   => $data[ 'name' ],
-			'post_name'    => $data[ 'identifier' ],
 			'post_content' => json_encode( [
 				'engine' => $engine,
 				'config' => array_merge( $orig_config, $inp_config ),

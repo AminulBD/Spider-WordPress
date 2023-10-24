@@ -10,19 +10,10 @@
 				</div>
 
 				<div class="col-span-6">
-					<label for="email" class="block text-sm font-medium leading-6 text-gray-900">Identifier</label>
-					<div class="mt-2">
-						<input v-model="site.identifier" type="text" class="block w-full">
-					</div>
-				</div>
-
-				<div class="col-span-full">
 					<label class="block text-sm font-medium leading-6 text-gray-900">Engine</label>
 					<div class="mt-2">
 						<select class="block w-full" v-model="site.engine">
-							<option>United States</option>
-							<option>Canada</option>
-							<option>Mexico</option>
+							<option v-for="(engine, idx) of engines" :key="idx" :value="engine.id">{{ engine.name }}</option>
 						</select>
 					</div>
 				</div>
@@ -61,5 +52,15 @@
 export default {
 	name: 'Site',
 	props: [ 'site' ],
+
+	data() {
+		return {
+			engines: [
+				{ name: 'Google', id: 'google' },
+				{ name: 'Bing', id: 'bing' },
+				{ name: 'WordPress', id: 'wordpress' },
+			]
+		}
+	}
 }
 </script>

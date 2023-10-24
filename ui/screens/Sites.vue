@@ -12,23 +12,23 @@
 				<div class="items-end">
 					<button class="rounded shadow px-3 py-1 bg-indigo-600 text-white hover:bg-indigo-500 transition-all"
 							@click="current = {}"
-					>Create New Site</button>
+					>Create New Site
+					</button>
 				</div>
 			</div>
 
-			<SiteForm v-if="current" :site="current" @save="console.log(this.current)" @cancel="current = null" />
+			<SiteForm v-if="current" :site="current" @save="this.save" @cancel="current = null" />
 
 			<ul role="list" class="divide-y">
-				<li v-for="(site, idx) of sites" class="flex justify-between mb-0 p-4 hover:bg-gray-50 transition-all hover:cursor-pointer" :key="idx" @click="current = site">
+				<li v-for="(site, idx) of sites" class="flex justify-between items-center mb-0 p-4 hover:bg-gray-50 transition-all hover:cursor-pointer" :key="idx" @click="current = site">
 					<div class="flex min-w-0 gap-x-4">
 						<img class="h-12 w-12 flex-none rounded-full bg-gray-50" src="../icons/engine.svg" alt="">
 						<div class="min-w-0 flex-auto">
 							<p class="text-sm font-semibold leading-6 text-gray-900">{{ site.name }}</p>
-							<p class="mt-1 truncate text-xs leading-5 text-gray-500">{{ site.identifier }}</p>
+							<small class="mt-1">{{ site.engine?.toUpperCase() }}</small>
 						</div>
 					</div>
 					<div class="shrink-0 flex flex-col items-end">
-						<p class="text-sm leading-6 text-gray-900">{{ site.engine?.toUpperCase() }}</p>
 						<span class="border bg-gray-600 rounded px-1.5 text-white text-xs inline-block" :class="{ 'bg-green-600': site.status === 'active' }">{{ site.status?.toUpperCase() }}</span>
 					</div>
 				</li>
@@ -65,6 +65,22 @@ export default {
 			this.sites = data.data ?? []
 			this.isLoading = false
 		},
+
+		async save() {
+			this.isLoading = true
+			const { name, engine, config, status } = this.current
+			let res
+
+			if (this.current.id) {
+				res = await apiClient.put(`/sites/${ this.current.id }`, { name, engine, config, status })
+			} else {
+				res = await apiClient.post('/sites', { name, engine, config, status })
+			}
+
+			await this.fetchSites()
+			this.current = null
+			this.isLoading = false
+		}
 	}
 }
 </script>
