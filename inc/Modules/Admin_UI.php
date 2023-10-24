@@ -18,6 +18,11 @@ class Admin_UI extends Module {
 	}
 
 	public function assets() {
+		global $parent_file;
+		if ( 'spider' != $parent_file ) {
+			return;
+		}
+
 		$manifest = json_decode( file_get_contents( SPIDER_PATH . 'public/manifest.json' ), true );
 
 		$js = $manifest[ 'ui/admin.js' ] ?? null;
