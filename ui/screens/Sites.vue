@@ -18,19 +18,27 @@
 			</div>
 
 			<ul role="list" class="divide-y">
-				<li v-for="(site, idx) of sites" class="flex justify-between items-center mb-0 p-4 hover:bg-gray-50 transition-all hover:cursor-pointer" :key="idx" @click="current = site">
+				<li v-for="(site, idx) of sites" class="flex justify-between items-center mb-0 p-4 hover:bg-gray-50 transition-all" :key="idx">
 					<div class="flex min-w-0 gap-x-4">
 						<img class="h-12 w-12 flex-none rounded-full bg-gray-50" src="../icons/engine.svg" alt="">
-						<div class="min-w-0 flex-auto">
-							<p class="text-sm font-semibold leading-6 text-gray-900">{{ site.name }}</p>
+						<div>
+							<p class="flex items-center">
+								<span class="text-lg font-semibold leading-6 text-gray-900">{{ site.name }}</span>
+								<small class="ml-2 bg-gray-600 rounded px-1.5 text-white inline-block" :class="{ 'bg-green-600': site.status === 'active' }">{{ site.status.toUpperCase() }}</small>
+							</p>
 							<small class="mt-1">{{ site.engine?.toUpperCase() }}</small>
 						</div>
 					</div>
-					<div class="shrink-0 flex flex-col items-end">
-						<button @click.stop="this.delete(site.id)">
-							<img class="h-6 w-6 flex-none rounded-full bg-gray-50" src="../icons/trash.svg" alt="">
+					<div class="shrink-0 flex items-end">
+						<button @click="this.run(site.id)">
+							<img class="h-6 w-6 flex-none rounded-full bg-gray-50" src="../icons/play-list.svg" alt="Run">
 						</button>
-						<span class="border bg-gray-600 rounded px-1.5 text-white text-xs inline-block" :class="{ 'bg-green-600': site.status === 'active' }">{{ site.status?.toUpperCase() }}</span>
+						<button @click="current = site">
+							<img class="h-6 w-6 flex-none rounded-full bg-gray-50" src="../icons/pen.svg" alt="Edit">
+						</button>
+						<button @click="this.delete(site.id)">
+							<img class="h-6 w-6 flex-none rounded-full bg-gray-50" src="../icons/trash.svg" alt="Delete">
+						</button>
 					</div>
 				</li>
 			</ul>
@@ -85,12 +93,28 @@ export default {
 		},
 
 		async delete(id) {
+			const yes = confirm("The site will be deleted permanently. Are you sure?")
+
+			if (!yes) {
+				return
+			}
+
 			this.isLoading = true
 			await apiClient.delete(`/sites/${ id }`)
 
 			await this.fetchSites()
 			this.current = null
 			this.isLoading = false
+
+		},
+
+		async run(id) {
+			const yes = confirm("Are you sure you want to run this site?")
+
+			if (!yes) {
+				return
+			}
+			console.log('done', id)
 		}
 	}
 }
