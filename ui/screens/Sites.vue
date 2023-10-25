@@ -114,7 +114,8 @@ export default {
 			if (!yes) {
 				return
 			}
-			console.log('done', id)
+
+			await apiClient.post(`/sites/${ id }`, { action: 'run' })
 		}
 	}
 }

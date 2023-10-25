@@ -35,6 +35,12 @@ class Site extends Module {
 		] );
 
 		register_rest_route( 'spider/v1', '/sites/(?P<id>\d+)', [
+			'methods'             => 'POST',
+			'callback'            => [ $this, 'run' ],
+			'permission_callback' => [ $this, 'has_access' ],
+		] );
+
+		register_rest_route( 'spider/v1', '/sites/(?P<id>\d+)', [
 			'methods'             => 'PUT',
 			'callback'            => [ $this, 'update' ],
 			'permission_callback' => [ $this, 'has_access' ],
@@ -107,6 +113,22 @@ class Site extends Module {
 	}
 
 	public function get( WP_REST_Request $request ): array {
+		$id   = $request->get_param( 'id' );
+		$site = get_post( $id );
+
+		if ( !$site || $site->post_type !== 'spider_site' ) {
+			return [
+				'message' => __( 'The requested site does not exist.', 'spider' ),
+			];
+		}
+
+		return [
+			'message' => __( 'Site details.', 'spider' ),
+			'data'    => $this->transform( $site ),
+		];
+	}
+
+	public function run( WP_REST_Request $request ): array {
 		$id   = $request->get_param( 'id' );
 		$site = get_post( $id );
 
