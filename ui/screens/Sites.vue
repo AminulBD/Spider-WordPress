@@ -7,7 +7,7 @@
 			No sites are available. <a href="#" @click.prevent="current = {}">Create New Site</a>
 		</div>
 		<div v-else class="bg-white rounded shadow">
-			<div class="flex justify-between items-center p-4 border-b">
+			<div class="flex justify-between items-center px-4 py-2 border-b">
 				<h2 class="text-lg font-bold">Sites</h2>
 				<div class="items-end">
 					<button class="rounded shadow px-3 py-1 bg-indigo-600 text-white hover:bg-indigo-500 transition-all"
