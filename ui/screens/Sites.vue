@@ -11,7 +11,7 @@
 				<h2 class="text-lg font-bold">Sites</h2>
 				<div class="items-end">
 					<button class="rounded shadow px-3 py-1 bg-indigo-600 text-white hover:bg-indigo-500 transition-all"
-							@click="current = {}"
+							@click="current = { status: 'inactive', engine: '' }"
 					>Create New Site
 					</button>
 				</div>

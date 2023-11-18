@@ -13,6 +13,7 @@
 					<label class="block text-sm font-medium leading-6 text-gray-900">Engine</label>
 					<div class="mt-2">
 						<select class="block w-full" v-model="site.engine">
+							<option value="">Select an engine</option>
 							<option v-for="(engine, idx) of engines" :key="idx" :value="engine.id">{{ engine.name }}</option>
 						</select>
 					</div>
