@@ -4,7 +4,8 @@
 			Loading...
 		</div>
 		<div v-if="!sites.length && !isLoading" class="border border-yellow-300 bg-yellow-100 p-2 shadow rounded">
-			No sites are available. <a href="#" @click.prevent="current = { status: 'inactive', engine: '', config: { limit: 15 } }">Create New Site</a>
+			No sites are available.
+			<a href="#" @click.prevent="current = { status: 'inactive', engine: '', config: { limit: 15 } }">Create New Site</a>
 		</div>
 		<div v-else class="bg-white rounded shadow">
 			<div class="flex justify-between items-center px-4 py-2 border-b">
@@ -30,7 +31,7 @@
 						</div>
 					</div>
 					<div class="shrink-0 flex items-end">
-						<button @click="this.run(site.id)">
+						<button @click="nowRun = site">
 							<img class="h-6 w-6 flex-none rounded-full bg-gray-50" src="../icons/play-list.svg" alt="Run">
 						</button>
 						<button @click="current = site">
@@ -45,21 +46,24 @@
 		</div>
 
 		<SiteForm v-if="current" :isLoading="isLoading" :site="current" @save="this.save" @cancel="current = null" />
+		<RunForm v-if="nowRun" :isLoading="isLoading" :site="nowRun" @run="this.run" @cancel="nowRun = null" />
 	</div>
 </template>
 
 <script>
-import apiClient from "~/lib/api-client";
-import SiteForm from "~/components/Forms/Site.vue";
+import apiClient from "~/lib/api-client"
+import SiteForm from "~/components/Forms/Site.vue"
+import RunForm from "~/components/Forms/Run.vue"
 
 export default {
 	name: 'Sites',
 
-	components: { SiteForm },
+	components: { SiteForm, RunForm },
 
 	data() {
 		return {
 			current: null,
+			nowRun: null,
 			sites: [],
 			isLoading: true,
 		}
@@ -108,14 +112,14 @@ export default {
 
 		},
 
-		async run(id) {
-			const yes = confirm("Are you sure you want to run this site?")
+		async run() {
+			this.isLoading = true
+			const keywords =  this.nowRun.keywords.split('\n').map(k => k.trim()).filter(k => k.length > 0)
 
-			if (!yes) {
-				return
-			}
+			await apiClient.post(`/sites/${ this.nowRun.id }`, { keywords })
 
-			await apiClient.post(`/sites/${ id }`, { action: 'run' })
+			this.nowRun = null
+			this.isLoading = false
 		}
 	}
 }

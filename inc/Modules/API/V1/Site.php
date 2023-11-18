@@ -9,9 +9,17 @@ use WP_Post;
 use WP_REST_Request;
 
 class Site extends Module {
-	public static string $name    = 'APIv1_Site';
-	public static string $version = '1.0.0';
-	public static string $type    = 'any';
+	public static string $name     = 'APIv1_Site';
+	public static string $version  = '1.0.0';
+	public static string $type     = 'any';
+	private static array $defaults = [
+		'name'   => 'New Site',
+		'engine' => 'google',
+		'status' => 'inactive',
+		'config' => [
+			'limit' => null,
+		],
+	];
 
 	public function __construct() {
 		$this->add_action( 'rest_api_init', [ $this, 'routes' ] );
@@ -72,17 +80,13 @@ class Site extends Module {
 	}
 
 	private function clean_fields( array $data ): array {
-		$defaults = [
-			'name'   => 'New Site',
-			'engine' => 'google',
-			'status' => 'inactive',
-			'config' => [
-				'limit' => null,
-			],
-		];
-		$filtered = array_intersect_key( $data, $defaults );
+		$filtered = array_intersect_key( $data, self::$defaults );
 
-		return array_merge( $defaults, $filtered );
+		$mergedFields = array_merge( self::$defaults, $filtered );
+		$currentConf  = $mergedFields[ 'config' ];
+		$mergedConf   = array_merge( self::$defaults[ 'config' ], $currentConf );
+
+		return array_merge( $mergedFields, [ 'config' => $mergedConf ] );
 	}
 
 	public function index(): array {
