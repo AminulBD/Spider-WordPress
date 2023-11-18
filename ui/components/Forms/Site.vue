@@ -19,12 +19,14 @@
 					</div>
 				</div>
 
-				<div class="col-span-full">
-					<label class="block text-sm font-medium leading-6 text-gray-900">Config</label>
-					<div class="mt-2">
-						<input type="text" class="block w-full">
+				<template v-for="(_, key) of site.config">
+					<div class="col-span-full">
+						<label class="block text-sm font-medium leading-6 text-gray-900">Config</label>
+						<div class="mt-2">
+							<input v-model="site.config[key]" :placeholder="key" type="text" class="block w-full">
+						</div>
 					</div>
-				</div>
+				</template>
 
 				<fieldset class="col-span-full">
 					<legend class="text-sm font-medium leading-6 text-gray-900">Status</legend>

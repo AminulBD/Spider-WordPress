@@ -4,14 +4,14 @@
 			Loading...
 		</div>
 		<div v-if="!sites.length && !isLoading" class="border border-yellow-300 bg-yellow-100 p-2 shadow rounded">
-			No sites are available. <a href="#" @click.prevent="current = {}">Create New Site</a>
+			No sites are available. <a href="#" @click.prevent="current = { status: 'inactive', engine: '', config: { limit: 15 } }">Create New Site</a>
 		</div>
 		<div v-else class="bg-white rounded shadow">
 			<div class="flex justify-between items-center px-4 py-2 border-b">
 				<h2 class="text-lg font-bold">Sites</h2>
 				<div class="items-end">
 					<button class="rounded shadow px-3 py-1 bg-indigo-600 text-white hover:bg-indigo-500 transition-all"
-							@click="current = { status: 'inactive', engine: '' }"
+							@click="current = { status: 'inactive', engine: '', config: { limit: 15 } }"
 					>Create New Site
 					</button>
 				</div>

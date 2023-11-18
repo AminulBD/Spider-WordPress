@@ -74,7 +74,9 @@ class Site extends Module {
 			'name'   => 'New Site',
 			'engine' => 'google',
 			'status' => 'inactive',
-			'config' => [],
+			'config' => [
+				'limit' => null,
+			],
 		];
 		$filtered = array_intersect_key( $data, $defaults );
 
@@ -157,7 +159,7 @@ class Site extends Module {
 		$data        = $this->clean_fields( $request->get_json_params() );
 		$content     = json_decode( $site->post_content, true ) ?? [];
 		$inp_config  = $data[ 'config' ];
-		$orig_config = $content[ 'config' ] ?? [];
+		$orig_config = $content[ 'config' ] ?? [ 'limit' => null ];
 		$engine      = $data[ 'engine' ] ?? $content[ 'engine' ];
 
 		wp_update_post( [
