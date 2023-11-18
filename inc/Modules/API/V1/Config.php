@@ -36,6 +36,7 @@ class Config extends Module {
 	private function clean_fields( array $data ): array {
 		$defaults = [
 			'pro_licence' => null,
+			'template'    => null,
 		];
 		$filtered = array_intersect_key( $data, $defaults );
 
@@ -56,6 +57,15 @@ class Config extends Module {
 					'rules'       => [ 'required' ],
 					'default'     => null,
 					'value'       => $config[ 'pro_licence' ] ?? null,
+				],
+				'template'    => [
+					'name'        => 'template',
+					'type'        => 'textarea',
+					'label'       => __( 'Template', 'spider' ),
+					'placeholder' => __( 'Build your template', 'spider' ),
+					'rules'       => [ 'required' ],
+					'default'     => null,
+					'value'       => $config[ 'template' ] ?? null,
 				],
 			],
 		];
