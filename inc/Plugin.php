@@ -9,7 +9,7 @@ use AminulBD\Spider\WordPress\Modules\API\V1\{
 	Config, Site
 };
 
-final class Spider {
+final class Plugin {
 	public string       $version = '1.0.0';
 	private array       $modules = [];
 	private static self $instance;
@@ -22,7 +22,7 @@ final class Spider {
 		$this->load_modules();
 	}
 
-	public static function init( $args ): Spider {
+	public static function init( $args ): Plugin {
 		if ( !isset( self::$instance ) ) {
 			self::$instance = new self( $args );
 		}

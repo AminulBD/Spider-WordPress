@@ -31,8 +31,8 @@ define( 'SPIDER_URL', plugin_dir_url( __FILE__ ) );
 define( 'SPIDER_PATH', plugin_dir_path( __FILE__ ) );
 define( 'SPIDER_ASSET_URL', plugin_dir_url( __FILE__ ) . 'public/' );
 
-function spider(): \AminulBD\Spider\WordPress\Spider {
-	return \AminulBD\Spider\WordPress\Spider::init( [
+function spider(): \AminulBD\Spider\WordPress\Plugin {
+	return \AminulBD\Spider\WordPress\Plugin::init( [
 		'version' => SPIDER_VERSION,
 	] );
 }

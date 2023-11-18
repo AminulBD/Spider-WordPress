@@ -9,7 +9,7 @@ class Config extends Module {
 	public static string $name       = 'APIv1_Config';
 	public static string $version    = '1.0.0';
 	public static string $type       = 'any';
-	private string       $option_key = '_spider_config';
+	public static string $option_key = '_spider_config';
 
 	public function __construct() {
 		$this->add_action( 'rest_api_init', [ $this, 'routes' ] );
@@ -44,7 +44,7 @@ class Config extends Module {
 	}
 
 	public function index(): array {
-		$config = get_option( $this->option_key );
+		$config = get_option( self::$option_key );
 
 		return [
 			'message' => 'Spider configuration.',
@@ -75,7 +75,7 @@ class Config extends Module {
 		$data = $this->clean_fields( $request->get_json_params() );
 
 		// TODO: validate $data with defined rules.
-		update_option( $this->option_key, $data );
+		update_option( self::$option_key, $data );
 
 		return [
 			'message' => __( 'Configuration saved successfully.', 'spider' ),

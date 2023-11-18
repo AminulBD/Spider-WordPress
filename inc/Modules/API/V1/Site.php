@@ -2,7 +2,9 @@
 
 namespace AminulBD\Spider\WordPress\Modules\API\V1;
 
+use AminulBD\Spider\Spider;
 use AminulBD\Spider\WordPress\Contracts\Module;
+use AminulBD\Spider\WordPress\Support\TemplateEngine;
 use WP_Post;
 use WP_REST_Request;
 
@@ -139,10 +141,48 @@ class Site extends Module {
 				'message' => __( 'The requested site does not exist.', 'spider' ),
 			];
 		}
+		$params = $request->get_json_params();
+		if ( !isset( $params[ 'keywords' ] ) || !is_array( $params[ 'keywords' ] ) || count( $params[ 'keywords' ] ) === 0 ) {
+			return [
+				'message' => __( 'Please input valid keywords.', 'spider' ),
+			];
+		}
+
+		$content = json_decode( $site->post_content, true );
+
+		$error   = null;
+		$results = [];
+		try {
+			$spider = new Spider( $content[ 'engine' ], $content[ 'config' ] );
+
+			foreach ( $params[ 'keywords' ] as $keyword ) {
+				$results[ $keyword ] = $spider->find( [ 'q' => $keyword ] )->next()->all();
+			}
+		} catch ( \Exception $e ) {
+			$error = $e->getMessage();
+		}
+
+		$template = get_option( Config::$option_key )[ 'template' ] ?? null;
+		$compiled = [];
+
+		foreach ( $results as $key => $value ) {
+			$compiled[ $key ] = TemplateEngine::view( $template, [
+				'keyword' => $key,
+				'items'   => $value,
+			] );
+		}
+
+		foreach ( $compiled as $keyword => $content ) {
+			wp_insert_post( [
+				'post_title'   => 'Top result of ' . $keyword,
+				'post_content' => $content,
+				'post_status'  => 'draft',
+			] );
+		}
 
 		return [
-			'message' => __( 'Site details.', 'spider' ),
-			'data'    => $this->transform( $site ),
+			'message' => $error ?? __( 'Site has been run.', 'spider' ),
+			'data'    => $results,
 		];
 	}
 
