@@ -3,7 +3,7 @@
 Grab latest feed from search engine like Google, Bing, WordPress, etc.
 
 ## Develop with Docker
-Change variables in the `.env.docker` file then run below command.
+Change variables in the `.env.docker` file then follow instruction below.
 
 
 ### 1. Build docker image
