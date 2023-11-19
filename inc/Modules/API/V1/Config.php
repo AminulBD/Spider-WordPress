@@ -35,8 +35,9 @@ class Config extends Module {
 
 	private function clean_fields( array $data ): array {
 		$defaults = [
-			'pro_licence' => null,
-			'template'    => null,
+			'pro_licence'      => null,
+			'subject_template' => null,
+			'content_template' => null,
 		];
 		$filtered = array_intersect_key( $data, $defaults );
 
@@ -49,7 +50,7 @@ class Config extends Module {
 		return [
 			'message' => 'Spider configuration.',
 			'data'    => [
-				'pro_licence' => [
+				'pro_licence'      => [
 					'name'        => 'pro_licence',
 					'type'        => 'text',
 					'label'       => __( 'Pro Licence', 'spider' ),
@@ -58,7 +59,7 @@ class Config extends Module {
 					'default'     => null,
 					'value'       => $config[ 'pro_licence' ] ?? null,
 				],
-				'subject_template'    => [
+				'subject_template' => [
 					'name'        => 'subject_template',
 					'type'        => 'text',
 					'label'       => __( 'Subject Template', 'spider' ),
@@ -66,9 +67,9 @@ class Config extends Module {
 					'rules'       => [ 'required' ],
 					'help'        => 'Available tags: $keyword',
 					'default'     => null,
-					'value'       => $config[ 'template' ] ?? null,
+					'value'       => $config[ 'subject_template' ] ?? null,
 				],
-				'content_template'    => [
+				'content_template' => [
 					'name'        => 'content_template',
 					'type'        => 'textarea',
 					'label'       => __( 'Content Template', 'spider' ),
@@ -76,7 +77,7 @@ class Config extends Module {
 					'rules'       => [ 'required' ],
 					'help'        => 'Available variables: $items',
 					'default'     => null,
-					'value'       => $config[ 'template' ] ?? null,
+					'value'       => $config[ 'content_template' ] ?? null,
 				],
 			],
 		];

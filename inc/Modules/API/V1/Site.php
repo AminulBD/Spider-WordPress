@@ -166,11 +166,14 @@ class Site extends Module {
 			$error = $e->getMessage();
 		}
 
-		$template = get_option( Config::$option_key )[ 'template' ] ?? null;
+		$options = get_option( Config::$option_key );
+
+		$template = $options[ 'content_template' ] ?? null;
+		$subject = $options[ 'subject_template' ] ?? 'Latest news for {{ $keyword }}';
 		$compiled = [];
 
 		foreach ( $results as $key => $value ) {
-			$compiled[ $key ] = TemplateEngine::view( $template, [
+			$compiled[ $key ] = TemplateEngine::render( $template, [
 				'keyword' => $key,
 				'items'   => $value,
 			] );
@@ -178,7 +181,9 @@ class Site extends Module {
 
 		foreach ( $compiled as $keyword => $content ) {
 			wp_insert_post( [
-				'post_title'   => 'Top result of ' . $keyword,
+				'post_title'   => TemplateEngine::render( $subject, [
+					'keyword' => $keyword,
+				] ),
 				'post_content' => $content,
 				'post_status'  => 'draft',
 			] );
